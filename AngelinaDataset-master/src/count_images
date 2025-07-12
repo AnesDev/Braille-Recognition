@@ -1,0 +1,15 @@
+from pathlib import Path
+
+root = Path("braille_characters")
+
+file_counts = {}
+
+for folder in root.iterdir():
+    if folder.is_dir():
+        count = sum(1 for f in folder.iterdir() if f.is_file())
+        file_counts[folder.name] = count
+
+print(f"Average : {sum(file_counts.values()) / len(file_counts)}\n")
+
+for key, value in file_counts.items():
+    print(f"Class {key} : {value}")
