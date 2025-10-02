@@ -1,12 +1,11 @@
 # Test file to verify Russian Braille transcription works
-# Save this as test_russian.py and run it after implementing the changes
 
 from braille_transcriptor.strategies.russian import RussianStrategy
 
 def test_russian_transcription():
     strategy = RussianStrategy()
     
-    # Test sample of your Braille text
+    # Test sample Braille text
     test_braille = "⠘⠊⠺⠁⠝ ⠘⠎⠑⠗⠛⠑⠑⠺⠊⠟ ⠘⠞⠥⠗⠛⠑⠝⠑⠺"
     
     print("Original Braille:", test_braille)
@@ -51,7 +50,7 @@ def test_russian_transcription():
     correct_braille = strategy.grade1.to_braille(correct_text)
     print(f"'{correct_text}' should be: '{correct_braille}'")
     
-    # Let's analyze each character in the problematic sequence
+    # analyze each character in the problematic sequence
     print("\n--- Character-by-character analysis ---")
     problematic = "⠎⠑⠗⠛⠑⠑⠺⠊⠟"
     print(f"Analyzing: {problematic}")
