@@ -8,7 +8,12 @@ class FrenchStrategy(Strategy):
         self.language = Language.French
         self.dictionary = Dictionary.French.value
         self.grade1 = self.Grade1(self)
-        self.grade2 = self.Grade2(self)
+        # Only instantiate Grade2 if the grade2_map exists and is populated with required sections
+        g2 = getattr(self.dictionary, 'grade2_map', {}) or {}
+        if isinstance(g2, dict) and all(k in g2 for k in ['alpha', 'numeric', 'char']):
+            self.grade2 = self.Grade2(self)
+        else:
+            self.grade2 = self.grade1
 
     class Grade1(Grade):
 

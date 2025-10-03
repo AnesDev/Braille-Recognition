@@ -46,7 +46,13 @@ class EnglishStrategy(Strategy):
         self.language = Language.English
         self.dictionary = Dictionary.English.value
         self.grade1 = self.Grade1(self)
-        self.grade2 = self.Grade2(self)
+        # Only instantiate Grade2 if the grade2_map is populated with required sections
+        g2 = getattr(self.dictionary, 'grade2_map', {}) or {}
+        if isinstance(g2, dict) and all(k in g2 for k in ['alpha', 'numeric', 'char']):
+            self.grade2 = self.Grade2(self)
+        else:
+            # Fallback: Use Grade1 behavior for Grade2 to avoid KeyError when grade2_map is empty
+            self.grade2 = self.grade1
 
     class Grade1(Grade):
 
